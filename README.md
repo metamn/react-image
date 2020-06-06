@@ -18,7 +18,7 @@ Responsive images for React
 2. Create a `Component.images.js` file where the HTML code is copy-pasted
 3. Import and display the image in your component
 
-See a [demo here](quick-trick.html).
+See a [demo here](quick-trick.html) of what you'll get from Cloudinary.
 
 ## Resources
 
