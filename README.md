@@ -4,28 +4,46 @@ Responsive images for React
 
 ## Why?
 
-- Current image libraries are incomplete, bounded or expensive.
+Images are a vast and continuously evolving subject in web development. From capturing screenshots automatically to displaying them responsively without flipping the page on loading — perhaps with placeholders — the list grows.
 
-  - Incomplete: Either lazy loading, or art direction, or preloading, or compression, or something is missing. (Npmjs and Github searched for `react-image` with nothing really usable found)
-  - Bounded: `gatsby-image` comes bundled with Sharp and transformers
-  - Expensive: Cloudinary seems to be perfect however on 10k visitors / month viiting 5 pages with 20 images needs the Pro plan which is EUR79/month)
+Just consider the following use case: display screenshots of web pages for design inspiration. The process is:
 
-- Images are a [constant](http://metamn.io/mr-ui/?selectedKind=Basics%2FImages%20%E2%9C%93&selectedStory=Overview&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook-addon-background%2Fbackground-panel&background=beige) [itch](http://metamn.io/react-best-practices/?path=/docs/loading-images--art-direction-with-Cloudinary) [for me](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js). Time to solve the problem.
+1. Select the best part of the website to screenshot.
+2. Create both portrait and landscape screenshots with large, retina friendly resolution.
+3. Resize them to lower resolutions for mobile and tablet displays.
+4. Optimize them with compression.
+5. Convert them to modern formats like WebP
+6. Add images to content responsively with art direction and resolution switching.
+7. Display them responsively without flicks during page load using an intrinsic ratio container.
+8. Display a progressive placeholder while loading.
+9. Make sure tens of images don't slow the page by using a lazy loading technique.
+10. Make sure they are served via a CDN for fast delivery.
 
-## Responsive image sizes and HTML code with Cloudinary
+What if this process could be reduced to:
 
-The most time consuming part of working with responsive images is to generate the various sizes from the original. Fortunately Cloudinary does that for you instantly.
+1. Select the best part of the website to screenshot.
+2. Capture both portrait and landscape screenshots with large, retina friendly resolution.
+3. Generate optimized responsive images.
+4. Add images to content with a single line of code without the need to set up <picture> or srcset, sizes.
+5. Display images
 
-1. Use Cloudinary's [Responsive Image Breakpoints Generator](https://www.responsivebreakpoints.com/) to generate all images needed and the associated HTML code. Both `<img>` and `<picture>` code is generated.
-2. Create a `Component.images.js` file where the HTML code is copy-pasted
-3. Import and display the image in your component
+## Capture screenshots (1-2)
 
-See a [demo here](quick-trick.html) of what you'll get from Cloudinary.
+With a tool like [screenshooter](https://github.com/vladocar/screenshoteer) one can capture both portrait and landscape screenshots in the command line.
 
-## Placeholders and lazy loading
+However only the top of the screen is captured. If you want to capture the seconds, third part of the page, or the footer you'll have to do it manually.
+
+## Generate responsive images and code (3-4)
+
+Use Cloudinary's [Responsive Image Breakpoints Generator](https://www.responsivebreakpoints.com/) to generate all images needed and the associated HTML code. Both `<img>` and `<picture>` code is generated.
+
+See a [demo here](cloudinary.html) of what you'll get from Cloudinary.
+
+## Display images
 
 tbd.
 
 ## Resources
 
 - [Responsive Images the Simple Way](https://cloudfour.com/thinks/responsive-images-the-simple-way/)
+- [An Almost Ideal React Image Component ](https://github.com/stereobooster/react-ideal-image)
