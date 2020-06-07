@@ -43,6 +43,13 @@ See a [demo here](cloudimage.html) of what you'll get from Cloudimage.
 
 Cloudimage offers a [React library](https://github.com/scaleflex/react-cloudimage-responsive) to display images hosted on their platform. However the costs can [go high](https://www.cloudimage.io/en/pricing), and, I found on browser resize sometimes [the images become blurry](http://metamn.io/react-best-practices/?path=/docs/loading-images--art-direction-with-Cloudimage).
 
+There are [plenty](https://github.com/stereobooster/react-ideal-image#other-solutions) of standalone React packages to display images.
+
+- [react-image](https://github.com/mbrevda/react-image) - Not responsive but with hooks and Suspense support. Also a pretty young package with lots of issues
+- [react-worker-image](https://github.com/nitish24p/react-worker-image) - An interesting take. Loading images with web workers to reduce page load speed.
+- [react-ideal-image](https://github.com/stereobooster/react-ideal-image) - 3.2k Github stars, not actively maintained
+- [react-progressive-image](https://github.com/FormidableLabs/react-progressive-image) - Already [tried and tested](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js) in production on http://inu.ro.
+
 ## Resources
 
 - [Responsive Images the Simple Way](https://cloudfour.com/thinks/responsive-images-the-simple-way/)
