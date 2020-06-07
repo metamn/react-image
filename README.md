@@ -39,16 +39,16 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 
 See a [demo here](cloudimage.html) of what you'll get from Cloudimage.
 
-## Display images
+## Display images (4-5)
 
-Cloudimage offers a [React library](https://github.com/scaleflex/react-cloudimage-responsive) to display images hosted on their platform. However the costs can [go high](https://www.cloudimage.io/en/pricing), and, I found on browser resize sometimes [the images become blurry](http://metamn.io/react-best-practices/?path=/docs/loading-images--art-direction-with-Cloudimage).
+Cloudimage offers a [React library](https://github.com/scaleflex/react-cloudimage-responsive) to display images hosted on their platform. However the costs can [go high](https://www.cloudimage.io/en/pricing), and I found on browser resize sometimes [the images become blurry](http://metamn.io/react-best-practices/?path=/docs/loading-images--art-direction-with-Cloudimage).
 
-There are [plenty](https://github.com/stereobooster/react-ideal-image#other-solutions) of standalone React packages to display images.
+On the other hand there are [plenty](https://github.com/stereobooster/react-ideal-image#other-solutions) of standalone React packages to display images.
 
-- [react-image](https://github.com/mbrevda/react-image) - Not responsive but with hooks and Suspense support. Also a pretty young package with lots of issues
-- [react-worker-image](https://github.com/nitish24p/react-worker-image) - An interesting take. Loading images with web workers to reduce page load speed.
-- [react-ideal-image](https://github.com/stereobooster/react-ideal-image) - 3.2k Github stars, not actively maintained
-- [react-progressive-image](https://github.com/FormidableLabs/react-progressive-image) - Already [tried and tested](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js) in production on http://inu.ro.
+- [react-image](https://github.com/mbrevda/react-image) - Not responsive but with hooks and Suspense support. Also a pretty young package with lots of issues. Single author.
+- [react-worker-image](https://github.com/nitish24p/react-worker-image) - An interesting take. Loading images with web workers to reduce page load speed. Single author.
+- [react-ideal-image](https://github.com/stereobooster/react-ideal-image) - 3.2k Github stars, not actively maintained. Multiple authors.
+- [react-progressive-image](https://github.com/FormidableLabs/react-progressive-image) - Already [tried and tested](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js) in production on http://inu.ro. Backed by Formidable.
 
 ## Resources
 
