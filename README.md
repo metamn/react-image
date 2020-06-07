@@ -29,19 +29,19 @@ What if this process could be reduced to:
 
 ## Capture screenshots (1-2)
 
-With a tool like [screenshooter](https://github.com/vladocar/screenshoteer) one can capture both portrait and landscape screenshots in the command line.
+With a tool like [screenshooter](https://github.com/vladocar/screenshoteer) you can capture both portrait and landscape screenshots in the command line.
 
-However only the top of the screen is captured. If you want to capture the seconds, third part of the page, or the footer you'll have to do it manually.
+However only the top of the screen is captured. If you want to capture other parts of the page like the footer you'll have to do it manually.
 
 ## Generate responsive images and code (3-4)
 
-Use Cloudinary's [Responsive Image Breakpoints Generator](https://www.responsivebreakpoints.com/) to generate all images needed and the associated HTML code. Both `<img>` and `<picture>` code is generated.
+Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsivebreakpoints.com/) to generate all images needed and the associated HTML code. Both `<img>` and `<picture>` code is generated.
 
-See a [demo here](cloudinary.html) of what you'll get from Cloudinary.
+See a [demo here](cloudimage.html) of what you'll get from Cloudimage.
 
 ## Display images
 
-tbd.
+Cloudimage offers a [React library](https://github.com/scaleflex/react-cloudimage-responsive) to display images hosted on their platform. However the costs can [go high](https://www.cloudimage.io/en/pricing), and, I found on browser resize sometimes [the images become blurry](http://metamn.io/react-best-practices/?path=/docs/loading-images--art-direction-with-Cloudimage).
 
 ## Resources
 
