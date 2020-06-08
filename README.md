@@ -158,10 +158,17 @@ The current state of art in responsive images &mdash; as of March 2020 &mdash; i
 
 ### SEO
 
+Idea:
+
+1. Content as data (JSON)
+2. Markup is generated from data
+3. Local file JSON database to query via an API (Next.js)
+
 - Schema.org proptypes
 - Generate and insert JSON-LD from proptypes
-- We have only Schema.org for Typescript
+- We have only Schema.org for Typescript provided by Google
 - What about non-Google formats? Facebook, Twitter etc ...
+- What about the frameworks? Gatsby (Helmet)? Next.js (next-seo)
 
 ## Resources
 
