@@ -101,11 +101,11 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 
 ### Requirements
 
-a. Built on existing libraries
-b. No page flicks when the images are loading
-c. Flexible placeholders. It can be an image, a component, a spinner, or anything else
-d. Lazy loading
-e. SEO
+1. Built on existing libraries
+2. No page flicks when the images are loading
+3. Flexible placeholders. It can be an image, a component, a spinner, or anything else
+4. Lazy loading
+5. SEO friendly
 
 ### Libraries
 
