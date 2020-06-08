@@ -154,7 +154,7 @@ To solve the problem the `width` and `height` attribute of the `<img>` tag has t
 />
 ```
 
-The current state of art in responsive images &mdash; as of March 2020 &mdash; is presented in [this article](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/). And a working solution width responsive sizing in [this repo](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js)
+The current state of art in responsive images &mdash; as of March 2020 &mdash; is presented in [this article](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/). And a working solution width responsive sizing in [this repo](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js).
 
 ## Resources
 
