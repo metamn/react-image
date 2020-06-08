@@ -102,7 +102,7 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 ### Requirements
 
 1. Built on existing libraries
-2. No page flicks when the images are loading
+2. Avoid layout shifts as the image is downloaded
 3. Flexible placeholders. It can be an image, a component, a spinner, or anything else
 4. Lazy loading
 5. SEO friendly
@@ -118,7 +118,53 @@ On the other hand there are [plenty](https://github.com/stereobooster/react-idea
 - [react-ideal-image](https://github.com/stereobooster/react-ideal-image) - 3.2k Github stars, not actively maintained. Multiple authors.
 - [react-progressive-image](https://github.com/FormidableLabs/react-progressive-image) - Already [tried and tested](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js) in production on http://inu.ro. Backed by Formidable.
 
+### Layout shifts
+
+By default responsive images (`<img srcset ...>` and `<picture>`) do a layout shift after the image is downloaded and it is displayed. The reason is: you can't set the `width` and `height` of the various images inside the `srcset` attribute. You can set `width` and `height` only once - for the image from the `src` attribute.
+
+Example:
+
+```html
+<img
+  src="http://metamn.io/assets/images/beat-home-mobile_desktop.png"
+  width="622"
+  srcset="
+    http://metamn.io/assets/images/beat-home-mobile_mobile.png  306w,
+    http://metamn.io/assets/images/beat-home-mobile_tablet.png  535w,
+    http://metamn.io/assets/images/beat-home-mobile_laptop.png  622w,
+    http://metamn.io/assets/images/beat-home-mobile_desktop.png 898w
+  "
+  sizes="(max-width: 767px) 306px, (max-width: 1024px) 535px, (max-width:1600px) 622px, 898px"
+/>
+```
+
+On tablet initially the `beat-home-mobile_desktop.png` of 622px width is loaded since it's in the `src` attribute.
+Later it will be replaced by `home-mobile_tablet.png` which is 535px wide. This causes a flick.
+
+To solve the problem the `width` and `height` attribute of the `<img>` tag has to be set responsively using media queries.
+
+```js
+<img
+  src={src}
+  alt={alt}
+  srcSet={srcSet}
+  sizes={sizes}
+  width=getWidthForTheCurrentViewport()
+  height=getHeightForTheCurrentViewport()
+/>
+```
+
+The current state of art (as of March 2020) is presented in [this article](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/). And a working solution in [this repo](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js)
+
 ## Resources
 
-- [Responsive Images the Simple Way](https://cloudfour.com/thinks/responsive-images-the-simple-way/)
-- [An Almost Ideal React Image Component ](https://github.com/stereobooster/react-ideal-image)
+- [Responsive Images the Simple
+  Way](https://cloudfour.com/thinks/responsive-images-the-simple-way/) - [An
+  Almost Ideal React Image Component
+  ](https://github.com/stereobooster/react-ideal-image) - [Setting Height And
+  Width On Images Is Important
+  Again](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/)
+
+```
+
+```
