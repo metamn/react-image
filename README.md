@@ -81,7 +81,7 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 ### Generated code
 
 - `srcset` is generated well
-- `sizes` should be adapted to the design
+- `sizes` should be adapted manually to the design
 
 ```html
 <img
@@ -97,7 +97,7 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 />
 ```
 
-## Display images (4-5)
+## Displaying images (4-5)
 
 Cloudimage offers a [React library](https://github.com/scaleflex/react-cloudimage-responsive) to display images hosted on their platform. However the costs can [go high](https://www.cloudimage.io/en/pricing), and I found on browser resize sometimes [the images become blurry](http://metamn.io/react-best-practices/?path=/docs/loading-images--art-direction-with-Cloudimage).
 
