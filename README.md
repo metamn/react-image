@@ -120,7 +120,7 @@ On the other hand there are [plenty](https://github.com/stereobooster/react-idea
 
 ### Layout shifts
 
-By default responsive images (`<img srcset ...>` and `<picture>`) do a layout shift after the image is downloaded and it is displayed. The reason is: you can't set the `width` and `height` of the various images inside the `srcset` attribute. You can set `width` and `height` only once - for the image from the `src` attribute.
+By default responsive images (`<img srcset ...>` and `<picture>`) do a layout shift after the image is downloaded and it is displayed. The reason is: you can't set the `width` and `height` of the various images inside the `srcset` attribute. You can set `width` and `height` only once &mdash; for the image from the `src` attribute.
 
 Example:
 
@@ -154,7 +154,7 @@ To solve the problem the `width` and `height` attribute of the `<img>` tag has t
 />
 ```
 
-The current state of art (as of March 2020) is presented in [this article](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/). And a working solution in [this repo](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js)
+The current state of art in responsive images &mdash; as of March 2020 &mdash; is presented in [this article](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/). And a working solution width responsive sizing in [this repo](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js)
 
 ## Resources
 
