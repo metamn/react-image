@@ -78,6 +78,25 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 
 <img src='sizes-2.png'/>
 
+### Generated code
+
+- `srcset` is generated well
+- `sizes` should be adapted to the design
+
+```html
+<img
+  sizes="(max-width: 2383px) 70vw, 1668px"
+  srcset="
+    badass-screenshot-portrait_ftkpbj_ar_4_3,c_fill,g_auto__c_scale,w_320.png   320w,
+    badass-screenshot-portrait_ftkpbj_ar_4_3,c_fill,g_auto__c_scale,w_691.png   691w,
+    badass-screenshot-portrait_ftkpbj_ar_4_3,c_fill,g_auto__c_scale,w_981.png   981w,
+    badass-screenshot-portrait_ftkpbj_ar_4_3,c_fill,g_auto__c_scale,w_1668.png 1668w
+  "
+  src="badass-screenshot-portrait_ftkpbj_ar_4_3,c_fill,g_auto__c_scale,w_1668.png"
+  alt=""
+/>
+```
+
 ## Display images (4-5)
 
 Cloudimage offers a [React library](https://github.com/scaleflex/react-cloudimage-responsive) to display images hosted on their platform. However the costs can [go high](https://www.cloudimage.io/en/pricing), and I found on browser resize sometimes [the images become blurry](http://metamn.io/react-best-practices/?path=/docs/loading-images--art-direction-with-Cloudimage).
