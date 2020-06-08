@@ -58,7 +58,25 @@ Browser tools lets you capture screenshots larger than your screen size. Go for 
 
 Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsivebreakpoints.com/) to generate all images needed and the associated HTML code. Both `<img>` and `<picture>` code is generated.
 
-See a [demo here](cloudimage.html) of what you'll get from Cloudimage.
+### Portrait settings
+
+- Resolution: 320-1024 (from iPhone 5 to iPad Pro 12")
+- Size step: 20 (Unchanged)
+- Maximum images: 4-6 (mobile small, mobile large, tablet small, tablet large + their retina versions, which might overlap. For example tablet small could be the 2x of mobile small)
+- Retina resolution: checked
+- Art direction: 4:3 (Tablet)
+
+<img src='sizes-1.png'/>
+
+### Landscape settings
+
+- Resolution: 960-1920 (from tablet in landscape mode to 1k)
+- Size step: 20 (Unchanged)
+- Maximum images: 4-6 (tablet, laptop, desktop + their retina versions, which might overlap)
+- Retina resolution: checked
+- Art direction: 16:9 (Small laptops)
+
+<img src='sizes-2.png'/>
 
 ## Display images (4-5)
 
