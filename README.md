@@ -49,9 +49,10 @@ Browser tools lets you capture screenshots larger than your screen size. Go for 
 - Landscape screenshot (4K, 16:9):
 
 <img src='badass-screenshot-landscape.png'/>
+
 - Portrait screenshot (1668x2224, 4:3):
 
-<img src='badass-screenshot-portrait.png'/>
+<img width=320 src='badass-screenshot-portrait.png'/>
 
 ## Generate responsive images and code (3-4)
 
