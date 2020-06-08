@@ -24,7 +24,7 @@ What if this process could be reduced to:
 1. Select the best part of the website to screenshot.
 2. Capture both portrait and landscape screenshots with large, retina friendly resolution.
 3. Generate optimized responsive images.
-4. Add images to content with a single line of code without the need to set up <picture> or srcset, sizes.
+4. Add images to content with a single line of code without the need to set up srcset or sizes.
 5. Display images
 
 ## Capture screenshots (1-2)
@@ -32,6 +32,26 @@ What if this process could be reduced to:
 With a tool like [screenshooter](https://github.com/vladocar/screenshoteer) you can capture both portrait and landscape screenshots in the command line.
 
 However only the top of the screen is captured. If you want to capture other parts of the page like the footer you'll have to do it manually.
+
+### Aspect ratio
+
+Images are best displayed when they have the same aspect ratio as their host screen: 16:9 on screens in landscape mode and 3/4 in portrait mode.
+
+When capturing screenshots always aim for these aspect ratios.
+
+### Retina
+
+Browser tools lets you capture screenshots larger than your screen size. Go for it and get 2x or 4x images.
+
+### Example:
+
+- Website: https://www.badass35.com/en/home
+- Landscape screenshot (4K, 16:9):
+
+<img src='badass-screenshot-landscape.png'/>
+- Portrait screenshot (1668x2224, 4:3):
+
+<img src='badass-screenshot-portrait.png'/>
 
 ## Generate responsive images and code (3-4)
 
