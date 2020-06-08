@@ -99,6 +99,16 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 
 ## Displaying images (4-5)
 
+### Requirements
+
+a. Built on existing libraries
+b. No page flicks when the images are loading
+c. Flexible placeholders. It can be an image, a component, a spinner, or anything else
+d. Lazy loading
+e. SEO
+
+### Libraries
+
 Cloudimage offers a [React library](https://github.com/scaleflex/react-cloudimage-responsive) to display images hosted on their platform. However the costs can [go high](https://www.cloudimage.io/en/pricing), and I found on browser resize sometimes [the images become blurry](http://metamn.io/react-best-practices/?path=/docs/loading-images--art-direction-with-Cloudimage).
 
 On the other hand there are [plenty](https://github.com/stereobooster/react-ideal-image#other-solutions) of standalone React packages to display images.
