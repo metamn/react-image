@@ -175,7 +175,7 @@ import { ImageJsonLd } from 'next-seo'; // Schema.org, JSON-LD
 import { NextSeo } from 'next-seo'; // OpenGraph
 
 /**
- * Import schema.org structure
+ * Reuse schema.org definitions
  */
 const propTypes = {
   /**
@@ -188,6 +188,7 @@ const propTypes = {
 };
 
 const defaultProps = {....}
+const props = ApiCall(...) || defaultProps
 
 ...
 
