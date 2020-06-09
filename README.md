@@ -158,17 +158,48 @@ The current state of art in responsive images &mdash; as of March 2020 &mdash; i
 
 ### SEO
 
-Idea:
+When content is data (not markup) many representations of the content can be generated. Be that HTML, JSON-LD or anything else. For browsers, bots and humans with disabilities.
 
-1. Content as data (JSON)
-2. Markup is generated from data
-3. Local file JSON database to query via an API (Next.js)
+With React the recipe would be:
 
-- Schema.org proptypes
-- Generate and insert JSON-LD from proptypes
-- We have only Schema.org for Typescript provided by Google
-- What about non-Google formats? Facebook, Twitter etc ...
-- What about the frameworks? Gatsby (Helmet)? Next.js (next-seo)
+1. For data: Entries in `propTypes` should contain entries from https://schema.org/image (like name, url, width, height from https://schema.org/ImageObject)
+2. For generator: After the HTML representation (`<img src...>`) also the JSON-LD or OpenGraph representation should be added perhaps with a plugin like https://github.com/garmeeh/next-seo
+
+Example:
+
+```js
+/**
+ * Import generators
+ */
+import { ImageJsonLd } from 'next-seo'; // Schema.org, JSON-LD
+import { NextSeo } from 'next-seo'; // OpenGraph
+
+/**
+ * Import schema.org structure
+ */
+const propTypes = {
+  /**
+   * From https://schema.org/ImageObject
+   */
+  name: PropType.string,
+  url: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number
+};
+
+const defaultProps = {....}
+
+...
+
+return (
+	<>
+		<img {...props} src={url}/>
+		{/* When props are in sync with Schema.org the generators should work in this simple way */}
+		<ImageJsonLd {...props}/>
+		<NextSeo openGraph={{...props}}/>
+	</>
+)
+```
 
 ## Resources
 
