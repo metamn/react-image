@@ -14,5 +14,5 @@ it("renders nothing when the URL is empty", () => {
 
 it("renders nothing when the URL is not an URL", () => {
   const { queryByRole } = render(<Image url="not an url" />);
-  expect(queryByRole("Image")).toBeNull();
+  expect(queryByRole("img")).toBeNull();
 });
