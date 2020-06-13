@@ -1,6 +1,50 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, shallow } from "@testing-library/react";
+import {
+  createShallow,
+  createRender,
+  createMount
+} from "@material-ui/core/test-utils";
+import Enzyme from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import Image from "./Image";
+
+Enzyme.configure({ adapter: new Adapter() });
+
+describe("Image", () => {
+  let shallow2;
+  let render2;
+  let mount2;
+
+  beforeAll(() => {
+    // This is Mocha; in Jest, use beforeAll
+    shallow2 = createShallow();
+    render2 = createRender();
+    mount2 = createMount();
+  });
+
+  afterAll(() => {
+    mount2.cleanUp();
+  });
+
+  it("does not overflow the parent container", () => {
+    const wrapper = mount2(<Image path="logo192.png" />);
+    console.log(wrapper.debug());
+    expect(wrapper.props().style).toHaveProperty("max-width", "100%");
+  });
+});
+
+it("displays the caption", () => {
+  const { queryByAltText } = render(
+    <Image path="logo192.png" caption="Image caption" />
+  );
+  expect(queryByAltText("Image caption")).toBeInTheDocument();
+});
+
+it("displays a default caption if the caption is missing", () => {
+  const { queryByAltText } = render(<Image path="logo192.png" />);
+  expect(queryByAltText("Image")).toBeInTheDocument();
+});
 
 it("renders well an image from the filesystem", () => {
   const { queryByRole } = render(<Image path="logo192.png" />);

@@ -20,3 +20,14 @@ export const FromPlaceholderCom = () => (
   <Image url="https://via.placeholder.com/728x90.png" />
 );
 export const FromFilesystem = () => <Image path="logo192.png" />;
+export const AlwaysDisplaysACaption = () => <Image path="logo192.png" />;
+export const DisplaysTheCaption = () => (
+  <Image path="logo192.png" caption="Image caption" />
+);
+export const DoesNotOverflowTheParentContainer = () => {
+  return (
+    <div style={{ width: 100, height: 100, background: "blue" }}>
+      <Image path="logo192.png" caption="Image caption" />
+    </div>
+  );
+};

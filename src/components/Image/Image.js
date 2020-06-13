@@ -78,6 +78,13 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     width: "100%",
     height: "100%"
+  },
+
+  image: {
+    /**
+     * Do not overflow the parent container
+     */
+    maxWidth: "100%"
   }
 }));
 
@@ -103,14 +110,19 @@ const Image = props => {
   if (src === url && !schema.isValidSync(props)) return null;
   if (src === path && !isValid(path)) return null;
 
-  const w = width ? `${width}px` : `auto`;
-  const h = height ? `${height}px` : `auto`;
+  /**
+   * Creates a default caption, if the caption is missing
+   */
+  const nonEmptyCaption = caption ? caption : "Image";
+
+  const w = width ? `${width}px` : null;
+  const h = height ? `${height}px` : null;
 
   const img = (
     <img
       className={clsx(image, "Image")}
       src={src}
-      alt={caption}
+      alt={nonEmptyCaption}
       width={w}
       height={h}
     />
