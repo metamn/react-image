@@ -5,18 +5,20 @@ import { makeStyles } from "@material-ui/styles";
 
 /**
  * Defines the prop types
+ *
+ * @see https://schema.org/image for naming props
  */
 const propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   url: PropTypes.string,
-  alt: PropTypes.string,
+  caption: PropTypes.string,
   /**
    * The image's aspect ratio
    * - formula: height / width
    * @see https://css-tricks.com/aspect-ratio-boxes/#the-math-of-any-possible-aspect-ratio
    */
-  ratio: PropTypes.number
+  aspectRatio: PropTypes.number
 };
 
 /**
@@ -26,8 +28,8 @@ const defaultProps = {
   width: 320,
   height: 180,
   url: "https://via.placeholder.com/320x180",
-  alt: "Placeholder image (320x180)",
-  ratio: 180 / 320
+  caption: "Placeholder image (320x180)",
+  aspectRatio: 180 / 320
 };
 
 /**
@@ -46,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     height: 0,
     overflow: "hidden",
-    paddingTop: `calc(${props.ratio} * 100%)`
+    paddingTop: `calc(${props.aspectRatio} * 100%)`
   }),
 
   aspectRatioBoxInside: {
@@ -62,7 +64,7 @@ const useStyles = makeStyles(theme => ({
  * Displays the component
  */
 const Image = props => {
-  const { url, alt, width, height, ratio } = props;
+  const { url, caption, width, height, aspectRatio } = props;
   const { container, aspectRatioBox, aspectRatioBoxInside, image } = useStyles(
     props
   );
@@ -74,13 +76,13 @@ const Image = props => {
     <img
       className={clsx(image, "Image")}
       src={url}
-      alt={alt}
+      alt={caption}
       width={w}
       height={h}
     />
   );
 
-  return ratio ? (
+  return aspectRatio ? (
     <div className={clsx(container, "ImageContainer")}>
       <div className={clsx(aspectRatioBox, "AspectRatioBox")}>
         <div className={clsx(aspectRatioBoxInside, "AspectRatioBoxInside")}>
