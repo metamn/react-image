@@ -25,11 +25,11 @@ const propTypes = {
  * Defines the default props
  */
 const defaultProps = {
-  width: 320,
-  height: 180,
-  url: "https://via.placeholder.com/320x180",
-  caption: "Placeholder image (320x180)",
-  aspectRatio: 180 / 320
+  width: null,
+  height: null,
+  url: null,
+  caption: null,
+  aspectRatio: null
 };
 
 /**
@@ -69,11 +69,18 @@ const Image = props => {
     props
   );
 
+  console.log("props:", props);
+
+  if (!url) return null;
+
+  console.log("a");
+
   const w = width ? `${width}px` : `auto`;
   const h = height ? `${height}px` : `auto`;
 
   const img = (
     <img
+      role="img"
       className={clsx(image, "Image")}
       src={url}
       alt={caption}
@@ -81,6 +88,8 @@ const Image = props => {
       height={h}
     />
   );
+
+  console.log("img", img);
 
   return aspectRatio ? (
     <div className={clsx(container, "ImageContainer")}>

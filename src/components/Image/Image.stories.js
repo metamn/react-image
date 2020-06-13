@@ -9,3 +9,6 @@ export default {
 };
 
 export const Default = () => <Image />;
+export const UrlIsNull = () => <Image url={null} />;
+export const UrlIsEmpty = () => <Image url="" />;
+export const UrlIsNotAnUrl = () => <Image url="not url" />;

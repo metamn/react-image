@@ -202,6 +202,8 @@ return (
 )
 ```
 
+### Accessibility
+
 ## Resources
 
 - [Responsive Images the Simple Way](https://cloudfour.com/thinks/responsive-images-the-simple-way/)
