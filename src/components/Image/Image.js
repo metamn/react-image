@@ -15,13 +15,13 @@ const propTypes = {
   height: PropTypes.number,
   /**
    * The URL of the image
-   * - When the image is served from an URL
+   * - Use when the image is served from an URL
    * - Either `url` or `path` has to be set
    */
   url: PropTypes.string,
   /**
    * The path to the image
-   * - When the image is served from the filesystem
+   * - use when the image is served from the filesystem
    * - Either `url` or `path` has to be set
    */
   path: PropTypes.string,
@@ -47,7 +47,7 @@ const defaultProps = {
 };
 
 /**
- * Defines validation schema for URL
+ * Defines validation schema for the URL
  */
 const schema = yup.object().shape({
   url: yup.string().url()
@@ -91,11 +91,10 @@ const Image = props => {
   );
 
   /**
-   * Checks the source of the image
+   * Checks the source of the image.
+   * - Either `url` or `path` should be used to define the source
    */
   const src = url ? url : path ? path : null;
-
-  console.log("src:", src);
 
   /**
    * Returns early on an empty or invalid URL or path
@@ -110,7 +109,7 @@ const Image = props => {
   const img = (
     <img
       className={clsx(image, "Image")}
-      src={url}
+      src={src}
       alt={caption}
       width={w}
       height={h}

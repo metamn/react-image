@@ -16,3 +16,7 @@ export const PathIsNull = () => <Image path={null} />;
 export const PathIsEmpty = () => <Image path="" />;
 export const PathIsNotAPath = () => <Image path="not/a/filename" />;
 export const PathAndUrlAreMissing = () => <Image />;
+export const FromPlaceholderCom = () => (
+  <Image url="https://via.placeholder.com/728x90.png" />
+);
+export const FromFilesystem = () => <Image path="logo192.png" />;
