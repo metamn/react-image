@@ -204,6 +204,10 @@ return (
 
 ### Accessibility
 
+A11y is an [ample chapter in React](https://reactjs.org/docs/accessibility.html). WAI ARIA props (`aria-*`) are fully supported, and, connected with testing. The [`ByRole` query](https://testing-library.com/docs/dom-testing-library/cheatsheet#queries) in React Testing Library can be used in writing tests.
+
+Images have no [WAI ARIA best practices](https://testing-library.com/docs/dom-testing-library/cheatsheet#queries). However we will use [`role="img"`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Role_Img) and test it with `ByRole`
+
 ## Resources
 
 - [Responsive Images the Simple Way](https://cloudfour.com/thinks/responsive-images-the-simple-way/)

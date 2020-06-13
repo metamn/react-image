@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/styles";
+import * as yup from "yup";
+import isValid from "is-valid-path";
 
 /**
  * Defines the prop types
@@ -11,7 +13,18 @@ import { makeStyles } from "@material-ui/styles";
 const propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
+  /**
+   * The URL of the image
+   * - When the image is served from an URL
+   * - Either `url` or `path` has to be set
+   */
   url: PropTypes.string,
+  /**
+   * The path to the image
+   * - When the image is served from the filesystem
+   * - Either `url` or `path` has to be set
+   */
+  path: PropTypes.string,
   caption: PropTypes.string,
   /**
    * The image's aspect ratio
@@ -28,9 +41,17 @@ const defaultProps = {
   width: null,
   height: null,
   url: null,
+  path: null,
   caption: null,
   aspectRatio: null
 };
+
+/**
+ * Defines validation schema for URL
+ */
+const schema = yup.object().shape({
+  url: yup.string().url()
+});
 
 /**
  * Styles the component
@@ -64,12 +85,24 @@ const useStyles = makeStyles(theme => ({
  * Displays the component
  */
 const Image = props => {
-  const { url, caption, width, height, aspectRatio } = props;
+  const { url, path, caption, width, height, aspectRatio } = props;
   const { container, aspectRatioBox, aspectRatioBoxInside, image } = useStyles(
     props
   );
 
-  if (!url) return null;
+  /**
+   * Checks the source of the image
+   */
+  const src = url ? url : path ? path : null;
+
+  console.log("src:", src);
+
+  /**
+   * Returns early on an empty or invalid URL or path
+   */
+  if (!src) return null;
+  if (src === url && !schema.isValidSync(props)) return null;
+  if (src === path && !isValid(path)) return null;
 
   const w = width ? `${width}px` : `auto`;
   const h = height ? `${height}px` : `auto`;

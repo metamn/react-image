@@ -16,3 +16,23 @@ it("renders nothing when the URL is not an URL", () => {
   const { queryByRole } = render(<Image url="not an url" />);
   expect(queryByRole("img")).toBeNull();
 });
+
+it("renders nothing when the path is null", () => {
+  const { queryByText } = render(<Image path={null} />);
+  expect(queryByText("Image")).toBeNull();
+});
+
+it("renders nothing when the path is empty", () => {
+  const { queryByText } = render(<Image path="" />);
+  expect(queryByText("Image")).toBeNull();
+});
+
+it("renders nothing when the path is not a filename", () => {
+  const { queryByRole } = render(<Image path="@#not-a-filename.js" />);
+  expect(queryByRole("img")).toBeNull();
+});
+
+it("renders nothing when both the path and the URL is missing", () => {
+  const { queryByRole } = render(<Image />);
+  expect(queryByRole("img")).toBeNull();
+});
