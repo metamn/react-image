@@ -48,11 +48,11 @@ Browser tools lets you capture screenshots larger than your screen size. Go for 
 - Website: https://www.badass35.com/en/home
 - Landscape screenshot (4K, 16:9):
 
-<img src='badass-screenshot-landscape.png'/>
+<img src='public/badass-screenshot-landscape.png'/>
 
 - Portrait screenshot (1668x2224, 4:3):
 
-<img width=320 src='badass-screenshot-portrait.png'/>
+<img width=320 src='public/badass-screenshot-portrait.png'/>
 
 ## Generate responsive images and code (3-4)
 
@@ -66,7 +66,7 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 - Retina resolution: checked
 - Art direction: 4:3 (Tablet)
 
-<img src='sizes-1.png'/>
+<img src='public/sizes-1.png'/>
 
 ### Landscape settings
 
@@ -76,7 +76,7 @@ Use Cloudimage's [Responsive Image Breakpoints Generator](https://www.responsive
 - Retina resolution: checked
 - Art direction: 16:9 (Small laptops)
 
-<img src='sizes-2.png'/>
+<img src='public/sizes-2.png'/>
 
 ### Generated code
 
