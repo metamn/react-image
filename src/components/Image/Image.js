@@ -58,8 +58,8 @@ const schema = yup.object().shape({
  */
 const useStyles = makeStyles(theme => ({
   /**
-   * Aspect ratio aspectRatioBoxes
-   * @see https://css-tricks.com/aspect-ratio-aspectRatioBoxes/
+   * Aspect ratio boxes
+   * @see https://css-tricks.com/aspect-ratio-boxes/
    */
   container: props => ({
     width: props.width
@@ -83,8 +83,16 @@ const useStyles = makeStyles(theme => ({
   image: {
     /**
      * Do not overflow the parent container
+     * @see https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/
      */
-    maxWidth: "100%"
+    maxWidth: "100%",
+    /**
+     * Do not distort the image
+     * - This introduces layout shifts even when `width` and `height` is set.
+     * - Therefore the aspect ratio workaround has to be used all the time.
+     * @see https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/
+     */
+    height: "auto"
   }
 }));
 
@@ -115,9 +123,29 @@ const Image = props => {
    */
   const nonEmptyCaption = caption ? caption : "Image";
 
+  /**
+   * Transforms width and height into pixels
+   */
   const w = width ? `${width}px` : null;
   const h = height ? `${height}px` : null;
 
+  /**
+   * Defines an explicit aspect ratio
+   *
+   * - We always need an aspect ratio container due to the layout shift introduced by `height: auto`
+   * - When `width` and `height` are set we can calculate the aspect ratio
+   * - When `width` and `height` are set we can still provide the `aspectRatio` to override them
+   * - When `width` and `height` are not set we still provide the `aspectRatio` to manage the layout shift
+   */
+  const derivedAspectRatio = aspectRatio
+    ? aspectRatio
+    : width && height
+    ? height / width
+    : null;
+
+  /**
+   * Displays a simple image
+   */
   const img = (
     <img
       className={clsx(image, "Image")}
@@ -128,7 +156,10 @@ const Image = props => {
     />
   );
 
-  return aspectRatio ? (
+  /**
+   * Wraps the image into an aspect ratio container
+   */
+  const imgWithAspectRatioContainer = (
     <div className={clsx(container, "ImageContainer")}>
       <div className={clsx(aspectRatioBox, "AspectRatioBox")}>
         <div className={clsx(aspectRatioBoxInside, "AspectRatioBoxInside")}>
@@ -136,9 +167,9 @@ const Image = props => {
         </div>
       </div>
     </div>
-  ) : (
-    img
   );
+
+  return aspectRatio ? imgWithAspectRatioContainer : img;
 };
 
 Image.propTypes = propTypes;

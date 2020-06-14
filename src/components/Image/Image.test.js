@@ -1,38 +1,10 @@
 import React from "react";
 import { render, shallow } from "@testing-library/react";
-import {
-  createShallow,
-  createRender,
-  createMount
-} from "@material-ui/core/test-utils";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Image from "./Image";
 
 Enzyme.configure({ adapter: new Adapter() });
-
-describe("Image", () => {
-  let shallow2;
-  let render2;
-  let mount2;
-
-  beforeAll(() => {
-    // This is Mocha; in Jest, use beforeAll
-    shallow2 = createShallow();
-    render2 = createRender();
-    mount2 = createMount();
-  });
-
-  afterAll(() => {
-    mount2.cleanUp();
-  });
-
-  it("does not overflow the parent container", () => {
-    const wrapper = mount2(<Image path="logo192.png" />);
-    console.log(wrapper.debug());
-    expect(wrapper.props().style).toHaveProperty("max-width", "100%");
-  });
-});
 
 it("displays the caption", () => {
   const { queryByAltText } = render(
