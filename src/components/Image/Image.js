@@ -141,6 +141,8 @@ const Image = props => {
     derivedAspectRatio: derivedAspectRatio
   });
 
+  // NOTE: When there is no dimensions and aspect ratio set the layout will shift. We can come up with a responsive mechanism to calculate an aspect ratio based on screen size. For example on portrait screens a 16:9, or a 4:3 on landscape. The idea is to make the image small, no to take the entire screen estate.
+
   /**
    * Checks the source of the image.
    * - Either `url` or `path` should be used to define the source
