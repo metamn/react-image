@@ -43,3 +43,65 @@ export const DoesNotDistortsTheImage = () => {
     </div>
   );
 };
+
+export const AnAspectRatioCanBeSpecified = () => {
+  return (
+    <Image path="logo192.png" caption="Image caption" aspectRatio={9 / 16} />
+  );
+};
+
+export const AspectRatioCanBeCalculatedFromWidthAndHeight = () => {
+  return (
+    <Image
+      path="logo192.png"
+      caption="Image caption"
+      width="150"
+      height="150"
+    />
+  );
+};
+
+export const TheAspectRatioBoxHasTheSameSizeAsTheImage = () => {
+  return (
+    <Image
+      path="sizes-1.png"
+      caption="Image caption"
+      width="933"
+      height="332"
+    />
+  );
+};
+
+export const AspectRatioOverwritesWidthAndHeight = () => {
+  return (
+    <Image
+      path="logo192.png"
+      caption="Image caption"
+      width="150"
+      height="150"
+      aspectRatio={9 / 16}
+    />
+  );
+};
+
+export const AspectRatioOverwritesWidthAndHeight2 = () => {
+  return (
+    <Image
+      path="badass-screenshot-portrait.png"
+      caption="Image caption"
+      width="150"
+      aspectRatio={9 / 16}
+    />
+  );
+};
+
+export const AspectRatioOverwritesWidthAndHeight3 = () => {
+  return (
+    <Image
+      path="badass-screenshot-landscape.png"
+      caption="Image caption"
+      width="150"
+      aspectRatio={4 / 3}
+    />
+  );
+};

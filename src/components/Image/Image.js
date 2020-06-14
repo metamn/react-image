@@ -57,19 +57,25 @@ const schema = yup.object().shape({
  * Styles the component
  */
 const useStyles = makeStyles(theme => ({
+  container: props => ({
+    /**
+     * The aspect ratio box tends to grow as wide as possible (the screen width, or parent container's width)
+     * This resizes the box to fit it's image size
+     */
+    width: `${props.width}px`,
+    height: `${props.height}px`,
+    backgroundColor: "red"
+  }),
+
   /**
    * Aspect ratio boxes
    * @see https://css-tricks.com/aspect-ratio-boxes/
    */
-  container: props => ({
-    width: props.width
-  }),
-
   aspectRatioBox: props => ({
     position: "relative",
     height: 0,
     overflow: "hidden",
-    paddingTop: `calc(${props.aspectRatio} * 100%)`
+    paddingBottom: `calc(${props.derivedAspectRatio} * 100%)`
   }),
 
   aspectRatioBoxInside: {
@@ -101,9 +107,36 @@ const useStyles = makeStyles(theme => ({
  */
 const Image = props => {
   const { url, path, caption, width, height, aspectRatio } = props;
-  const { container, aspectRatioBox, aspectRatioBoxInside, image } = useStyles(
-    props
-  );
+
+  /**
+   * Defines an explicit aspect ratio
+   *
+   * - We always need an aspect ratio container due to the layout shift introduced by `height: auto`
+   * - In other words specifying an aspect ratio is more important than specifying the image dimension
+   *
+   * - When the image dimension is not set we can still provide the `aspectRatio` prop to manage the layout shift
+   * - When the image dimension is set we can automatically calculate the aspect ratio
+   */
+  const derivedAspectRatio = aspectRatio
+    ? aspectRatio
+    : width && height
+    ? height / width
+    : null;
+
+  /**
+   *  When the image dimension is set we can still override the calculated aspect ratio with a provided `aspectRatio` prop
+   */
+  const derivedDimensions =
+    aspectRatio && width && height
+      ? { width: width / aspectRatio, height: height }
+      : { width: width, height: height };
+
+  console.log("derivedDimensions:", derivedDimensions);
+
+  const { container, aspectRatioBox, aspectRatioBoxInside, image } = useStyles({
+    ...derivedDimensions,
+    derivedAspectRatio: derivedAspectRatio
+  });
 
   /**
    * Checks the source of the image.
@@ -124,28 +157,6 @@ const Image = props => {
   const nonEmptyCaption = caption ? caption : "Image";
 
   /**
-   * Transforms width and height into pixels
-   */
-  const w = width ? `${width}px` : null;
-  const h = height ? `${height}px` : null;
-
-  /**
-   * Defines an explicit aspect ratio
-   *
-   * - We always need an aspect ratio container due to the layout shift introduced by `height: auto`
-   * - In other words specifying an aspect ratio is more important than specifying the image dimension
-   *
-   * - When the image dimension is not set we can still provide the `aspectRatio` to manage the layout shift
-   * - When the image dimension is set we can automatically calculate the aspect ratio
-   * - When the image dimension is set we can still override the calculated aspect ratio with a provided `aspectRatio` prop
-   */
-  const derivedAspectRatio = aspectRatio
-    ? aspectRatio
-    : width && height
-    ? height / width
-    : null;
-
-  /**
    * Displays the image
    */
   const img = (
@@ -153,8 +164,8 @@ const Image = props => {
       className={clsx(image, "Image")}
       src={src}
       alt={nonEmptyCaption}
-      width={w}
-      height={h}
+      width={width}
+      height={height}
     />
   );
 
