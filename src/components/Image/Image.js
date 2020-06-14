@@ -133,9 +133,11 @@ const Image = props => {
    * Defines an explicit aspect ratio
    *
    * - We always need an aspect ratio container due to the layout shift introduced by `height: auto`
-   * - When `width` and `height` are set we can calculate the aspect ratio
-   * - When `width` and `height` are set we can still provide the `aspectRatio` to override them
-   * - When `width` and `height` are not set we still provide the `aspectRatio` to manage the layout shift
+   * - In other words specifying an aspect ratio is more important than specifying the image dimension
+   *
+   * - When the image dimension is not set we can still provide the `aspectRatio` to manage the layout shift
+   * - When the image dimension is set we can automatically calculate the aspect ratio
+   * - When the image dimension is set we can still override the calculated aspect ratio with a provided `aspectRatio` prop
    */
   const derivedAspectRatio = aspectRatio
     ? aspectRatio
@@ -144,7 +146,7 @@ const Image = props => {
     : null;
 
   /**
-   * Displays a simple image
+   * Displays the image
    */
   const img = (
     <img
@@ -169,7 +171,7 @@ const Image = props => {
     </div>
   );
 
-  return aspectRatio ? imgWithAspectRatioContainer : img;
+  return derivedAspectRatio ? imgWithAspectRatioContainer : img;
 };
 
 Image.propTypes = propTypes;
