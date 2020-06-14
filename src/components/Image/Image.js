@@ -124,7 +124,9 @@ const Image = props => {
     : null;
 
   /**
-   *  When the image dimension is set we can still override the calculated aspect ratio with a provided `aspectRatio` prop
+   * When the image dimension is set we can still override the calculated aspect ratio with a provided `aspectRatio` prop
+   *
+   * // NOTE: This can truncate the image sometimes. A deeper analysis is needed.
    */
   const derivedDimensions =
     aspectRatio && width && height

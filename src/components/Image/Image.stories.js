@@ -84,6 +84,9 @@ export const AspectRatioOverwritesWidthAndHeight = () => {
   );
 };
 
+/**
+ * // NOTE: img {width:auto;height:100%} has to be set
+ */
 export const AspectRatioOverwritesWidthAndHeight2 = () => {
   return (
     <Image
