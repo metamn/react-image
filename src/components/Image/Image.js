@@ -131,8 +131,9 @@ const Image = props => {
       ? { width: width / aspectRatio, height: height }
       : { width: width, height: height };
 
-  console.log("derivedDimensions:", derivedDimensions);
-
+  /**
+   * Applies the styles based on the above calculations
+   */
   const { container, aspectRatioBox, aspectRatioBoxInside, image } = useStyles({
     ...derivedDimensions,
     derivedAspectRatio: derivedAspectRatio
