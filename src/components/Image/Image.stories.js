@@ -44,6 +44,10 @@ export const DoesNotDistortsTheImage = () => {
   );
 };
 
+export const WhenNoWidthHeightOrAspectRatioThePageFlicks = () => {
+  return <Image path="logo192.png" caption="Image caption" />;
+};
+
 export const AnAspectRatioCanBeSpecified = () => {
   return (
     <Image path="logo192.png" caption="Image caption" aspectRatio={9 / 16} />
