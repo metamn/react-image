@@ -106,7 +106,15 @@ const useStyles = makeStyles(theme => ({
  * Displays the component
  */
 const Image = props => {
-  const { url, path, caption, width, height, aspectRatio } = props;
+  const {
+    url,
+    path,
+    caption,
+    width,
+    height,
+    aspectRatio,
+    ...responsiveProps
+  } = props;
 
   /**
    * Defines an explicit aspect ratio
@@ -171,6 +179,7 @@ const Image = props => {
       alt={nonEmptyCaption}
       width={width}
       height={height}
+      {...responsiveProps}
     />
   );
 

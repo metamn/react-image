@@ -23,7 +23,7 @@ const propTypes = {
   sizes: PropTypes.string,
   /**
    * The widths used in the `srcSet`.
-   * They will be used cre create responsive image sizes to avoid layot shifts.
+   * They will be used to create responsive image sizes to avoid layot shifts.
    */
   srcSetWidths: PropTypes.arrayOf(PropTypes.string)
 };
@@ -68,7 +68,7 @@ const createResponsiveWidths = props => {
 
   if (!widths || !breakpoints) return null;
 
-  widths.shift();
+  //widths.shift();
   const wlength = widths.length;
   const wlast = widths[wlength - 1];
   const normalizedWidths = Object.keys(breakpoints).map((breakpoint, index) =>
@@ -91,8 +91,10 @@ const useStyles = makeStyles(theme => ({
  * Displays the component
  */
 const ImageResponsive = props => {
-  const { srcSetWidths } = props;
+  const { srcSetWidths, ...otherProps } = props;
   const { image } = useStyles();
+
+  // NOTE: srcSetWidths can be guessed from srcSet ...
 
   /**
    * Creates responsive widths for the various breakpoints
@@ -104,13 +106,7 @@ const ImageResponsive = props => {
 
   console.log("responsiveWidths:", responsiveWidths);
 
-  return (
-    <Image
-      className={clsx(image, "ResponsiveImage")}
-      {...props}
-      responsiveWidths={responsiveWidths}
-    />
-  );
+  return <Image className={clsx(image, "ResponsiveImage")} {...otherProps} />;
 };
 
 ImageResponsive.propTypes = propTypes;
