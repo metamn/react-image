@@ -120,7 +120,7 @@ On the other hand there are [plenty](https://github.com/stereobooster/react-idea
 
 ### Layout shifts
 
-By default responsive images (`<img srcset ...>` and `<picture>`) do a layout shift after the image is downloaded and it is displayed. The reason is: you can't set the `width` and `height` of the various images inside the `srcset` attribute. You can set `width` and `height` only once &mdash; for the image from the `src` attribute.
+By default responsive images (`<img srcset ...>` and `<picture>`) do a layout shift after the image is downloaded and it is displayed. Reasons vary but mostly: you can't set the `width` and `height` of the images inside the `srcset` attribute.
 
 Example:
 
@@ -141,20 +141,9 @@ Example:
 On tablet initially the `beat-home-mobile_desktop.png` of 622px width is loaded since it's in the `src` attribute.
 Later it will be replaced by `home-mobile_tablet.png` which is 535px wide. This causes a flick.
 
-To solve the problem the `width` and `height` attribute of the `<img>` tag has to be set responsively using media queries.
+To solve the problem the aspect ratio of the image has to be set. Read more about this current best practice (March 2020) [here](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/).
 
-```js
-<img
-  src={src}
-  alt={alt}
-  srcSet={srcSet}
-  sizes={sizes}
-  width=getWidthForTheCurrentViewport()
-  height=getHeightForTheCurrentViewport()
-/>
-```
-
-The current state of art in responsive images &mdash; as of March 2020 &mdash; is presented in [this article](https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/). And a working solution width responsive sizing in [this repo](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js).
+There is another workaround like setting image dimensions in CSS for every breakpoint. A working example can be found [here](https://github.com/metamn/inu-v2-b/blob/master/react-src/src/components/ImageResponsive/ImageResponsive.js)
 
 ### SEO
 

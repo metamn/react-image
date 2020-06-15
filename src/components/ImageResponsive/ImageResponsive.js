@@ -40,7 +40,7 @@ const defaultProps = {
  */
 const ImageResponsive = props => {
   /**
-   * Removes unsafe props
+   * Perpares safe props for `<Image />`
    * - When an image is responsive setting the `width`, `height` on `src` makes no sense
    */
   const { width, height, ...safeProps } = props;
