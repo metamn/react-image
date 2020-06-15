@@ -20,12 +20,7 @@ const propTypes = {
   /**
    * A set of source sizes
    */
-  sizes: PropTypes.string,
-  /**
-   * The widths used in the `srcSet`.
-   * They will be used to create responsive image sizes to avoid layot shifts.
-   */
-  srcSetWidths: PropTypes.arrayOf(PropTypes.string)
+  sizes: PropTypes.string
 };
 
 /**
@@ -34,8 +29,7 @@ const propTypes = {
 const defaultProps = {
   ...ImageDefaultProps,
   srcSet: null,
-  sizes: null,
-  srcSetWidths: null
+  sizes: null
 };
 
 /**
@@ -43,6 +37,20 @@ const defaultProps = {
  * - These should come from the theme and should be adapted to the current site's design
  */
 const breakpoints = [320, 768, 1280, 1440];
+
+/**
+ * Returns an array of widths from srcSet
+ *
+ * Example:
+ * srcSet="image-name-w_960.png 960w, image-name-w_1722.png 1722w, image-name-w_2388.png 2388w,  image-name-w_3840.png 3840w"
+ *
+ * Returns: [960, 1722, 2338, 3840]
+ */
+const getWidthsFromSrcset = props => {
+  const { srcSet } = props;
+
+  const entries = srcSet.split(",");
+};
 
 /**
  * Creates responsive widths and heights for an image.
@@ -91,22 +99,9 @@ const useStyles = makeStyles(theme => ({
  * Displays the component
  */
 const ImageResponsive = props => {
-  const { srcSetWidths, ...otherProps } = props;
   const { image } = useStyles();
 
-  // NOTE: srcSetWidths can be guessed from srcSet ...
-
-  /**
-   * Creates responsive widths for the various breakpoints
-   */
-  const responsiveWidths = createResponsiveWidths({
-    breakpoints: breakpoints,
-    widths: srcSetWidths
-  });
-
-  console.log("responsiveWidths:", responsiveWidths);
-
-  return <Image className={clsx(image, "ResponsiveImage")} {...otherProps} />;
+  return <Image className={clsx(image, "ResponsiveImage")} {...props} />;
 };
 
 ImageResponsive.propTypes = propTypes;
