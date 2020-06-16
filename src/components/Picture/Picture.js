@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 
 import Image, { ImagePropTypes, ImageDefaultProps } from "../Image";
+import AspectRatioBox, {
+  AspectRatioBoxPropTypes,
+  deriveAspectRatio
+} from "../AspectRatioBox";
 
 /**
  * Defines the prop types
@@ -30,9 +34,7 @@ const propTypes = {
        * - Either `width` and `height`, or `aspectRatio` should be defined.
        * - Preferably `aspectRatio`
        */
-      width: PropTypes.number,
-      height: PropTypes.number,
-      aspectRatio: PropTypes.number
+      ...AspectRatioBoxPropTypes
     })
   )
 };
@@ -73,12 +75,54 @@ const Picture = props => {
       );
     });
 
-  return (
+  /**
+   * Collects responsive aspect ratios for every `<source>`
+   */
+  const responsiveAspectRatios =
+    sources &&
+    sources
+      .map(item => {
+        const { media } = item;
+        const derivedAspectRatio = deriveAspectRatio(item);
+
+        return (
+          media &&
+          derivedAspectRatio && {
+            [`@media ${media}`]: {
+              paddingBottom: `calc(${derivedAspectRatio} * 100%)`
+            }
+          }
+        );
+      })
+      .filter(item => item !== undefined && item !== null);
+
+  console.log("responsiveAspectRatios[0]:", responsiveAspectRatios[0]);
+
+  /**
+   * Displays the picture
+   */
+  const picture = (
     <picture className={clsx("ResponsiveImage")}>
       {sourceList}
       <Image {...safeProps} />
     </picture>
   );
+
+  /**
+   * Wraps the picture inside a responsive aspect ratio container
+   */
+  const pictureWithAspectRatioContainer = (
+    <AspectRatioBox responsiveAspectRatios={responsiveAspectRatios}>
+      {picture}
+    </AspectRatioBox>
+  );
+
+  /**
+   * Returns either a simple picture or one wrapped into an aspect ratio container
+   */
+  return responsiveAspectRatios.length > 0
+    ? pictureWithAspectRatioContainer
+    : picture;
 };
 
 Picture.propTypes = propTypes;

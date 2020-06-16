@@ -2,5 +2,6 @@ export {
   default,
   AspectRatioBoxPropTypes,
   AspectRatioBoxDefaultProps,
-  isAspectRatioDefined
+  isAspectRatioDefined,
+  deriveAspectRatio
 } from "./AspectRatioBox";

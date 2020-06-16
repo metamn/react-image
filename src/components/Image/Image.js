@@ -139,7 +139,7 @@ const Image = props => {
   );
 
   /**
-   * Returns either a simple image or one warpped into an aspect ratio box
+   * Returns either a simple image or one wrapped into an aspect ratio container
    */
   return isAspectRatioDefined(props) ? imgWithAspectRatioContainer : img;
 };

@@ -21,6 +21,7 @@ const propTypes = {
    * @see https://css-tricks.com/aspect-ratio-boxes/#the-math-of-any-possible-aspect-ratio
    */
   aspectRatio: PropTypes.number,
+  responsiveAspectRatios: PropTypes.arrayOf(PropTypes.object),
   children: PropTypes.any
 };
 
@@ -31,6 +32,7 @@ const defaultProps = {
   width: null,
   height: null,
   aspectRatio: null,
+  responsiveAspectRatios: null,
   children: null
 };
 
@@ -52,7 +54,8 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     height: 0,
     overflow: "hidden",
-    paddingBottom: `calc(${props.derivedAspectRatio} * 100%)`
+    paddingBottom: `calc(${props.derivedAspectRatio} * 100%)`,
+    ...props.responsiveAspectRatios
   }),
 
   boxInside: {
@@ -73,20 +76,27 @@ const isAspectRatioDefined = props => {
 };
 
 /**
+ * Defines an explicit aspect ratio
+ * - When `aspectRatio` is missing it is calculated from `width` and `height`
+ */
+const deriveAspectRatio = props => {
+  const { aspectRatio, width, height } = props;
+  return aspectRatio ? aspectRatio : width && height ? height / width : null;
+};
+
+/**
  * Displays the component
  */
 const AspectRatioBox = props => {
-  const { width, height, aspectRatio, children } = props;
+  const {
+    width,
+    height,
+    aspectRatio,
+    responsiveAspectRatios,
+    children
+  } = props;
 
-  /**
-   * Defines an explicit aspect ratio
-   * - When `aspectRatio` is missing it is calculated from `width` and `height`
-   */
-  const derivedAspectRatio = aspectRatio
-    ? aspectRatio
-    : width && height
-    ? height / width
-    : null;
+  console.log("responsiveAspectRatios:", ...responsiveAspectRatios);
 
   /**
    * When both `aspectRatio`, `width` and `height` is set `width` has to be modified
@@ -103,7 +113,8 @@ const AspectRatioBox = props => {
    */
   const { container, box, boxInside } = useStyles({
     ...derivedDimensions,
-    derivedAspectRatio: derivedAspectRatio
+    derivedAspectRatio: deriveAspectRatio(props),
+    responsiveAspectRatios: responsiveAspectRatios
   });
 
   // NOTE: When there is no dimensions and aspect ratio set the layout will shift. We can come up with a responsive mechanism to calculate an aspect ratio based on screen size. For example on portrait screens a 16:9, or a 4:3 on landscape. The idea is to make the image small, no to take the entire screen estate.
@@ -126,5 +137,6 @@ export default AspectRatioBox;
 export {
   propTypes as AspectRatioBoxPropTypes,
   defaultProps as AspectRatioBoxDefaultProps,
-  isAspectRatioDefined
+  isAspectRatioDefined,
+  deriveAspectRatio
 };

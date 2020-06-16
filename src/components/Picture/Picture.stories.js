@@ -16,22 +16,26 @@ export const DemoWithPlaceholders = () => (
       {
         media: "(min-width: 1600px)",
         srcSet:
-          "https://via.placeholder.com/1600x900.png?text=1600x900, https://via.placeholder.com/3200x1800.png?text=3200x1800 (1600x900 2x)"
+          "https://via.placeholder.com/1600x900.png?text=1600x900, https://via.placeholder.com/3200x1800.png?text=3200x1800 (1600x900 2x)",
+        aspectRatio: 900 / 1600
       },
       {
         media: "(min-width: 1024px)",
         srcSet:
-          "https://via.placeholder.com/1024x768.png?text=1024x768, https://via.placeholder.com/2048x1526.png?text=2048x1526 (1024x768 2x)"
+          "https://via.placeholder.com/1024x768.png?text=1024x768, https://via.placeholder.com/2048x1526.png?text=2048x1526 (1024x768 2x)",
+        aspectRatio: 768 / 1024
       },
       {
         media: "(min-width: 600px)",
         srcSet:
-          "https://via.placeholder.com/768x1024.png?text=768x1024, https://via.placeholder.com/1526x2048.png?text=1526x2048 (768x1024 2x)"
+          "https://via.placeholder.com/768x1024.png?text=768x1024, https://via.placeholder.com/1526x2048.png?text=1526x2048 (768x1024 2x)",
+        aspectRatio: 1024 / 768
       },
       {
         media: "(max-width: 599px)",
         srcSet:
-          "https://via.placeholder.com/320x320.png?text=320x320, https://via.placeholder.com/640x640.png?text=640x640 (320x320 2x)"
+          "https://via.placeholder.com/320x320.png?text=320x320, https://via.placeholder.com/640x640.png?text=640x640 (320x320 2x)",
+        aspectRatio: 320 / 320
       }
     ]}
     url="http://metamn.io/beat/assets/images/bohen-landscape_laptop.png"
