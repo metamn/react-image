@@ -19,9 +19,20 @@ const propTypes = {
    */
   sources: PropTypes.arrayOf(
     PropTypes.shape({
+      /**
+       * Standard props
+       */
       srcSet: PropTypes.string,
       media: PropTypes.string,
-      type: PropTypes.string
+      type: PropTypes.string,
+      /**
+       * Additional props to solve the layout shift problem
+       * - Either `width` and `height`, or `aspectRatio` should be defined.
+       * - Preferably `aspectRatio`
+       */
+      width: PropTypes.number,
+      height: PropTypes.number,
+      aspectRatio: PropTypes.number
     })
   )
 };
@@ -45,17 +56,22 @@ const Picture = props => {
    */
   const { width, height, sources, ...safeProps } = props;
 
-  const sourceList = sources.map(item => {
-    const { srcSet, media, type } = item;
+  /**
+   * Creates `<source>` entries
+   */
+  const sourceList =
+    sources &&
+    sources.map(item => {
+      const { srcSet, media, type } = item;
 
-    return (
-      <source
-        srcset={srcSet ? srcSet : null}
-        media={media ? media : null}
-        type={type ? type : null}
-      />
-    );
-  });
+      return (
+        <source
+          srcset={srcSet ? srcSet : null}
+          media={media ? media : null}
+          type={type ? type : null}
+        />
+      );
+    });
 
   return (
     <picture className={clsx("ResponsiveImage")}>
