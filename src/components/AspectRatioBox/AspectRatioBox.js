@@ -96,7 +96,10 @@ const AspectRatioBox = props => {
     children
   } = props;
 
-  console.log("responsiveAspectRatios:", ...responsiveAspectRatios);
+  console.log(
+    "responsiveAspectRatios:",
+    JSON.stringify(...responsiveAspectRatios)
+  );
 
   /**
    * When both `aspectRatio`, `width` and `height` is set `width` has to be modified
@@ -114,7 +117,7 @@ const AspectRatioBox = props => {
   const { container, box, boxInside } = useStyles({
     ...derivedDimensions,
     derivedAspectRatio: deriveAspectRatio(props),
-    responsiveAspectRatios: responsiveAspectRatios
+    responsiveAspectRatios: JSON.stringify(...responsiveAspectRatios)
   });
 
   // NOTE: When there is no dimensions and aspect ratio set the layout will shift. We can come up with a responsive mechanism to calculate an aspect ratio based on screen size. For example on portrait screens a 16:9, or a 4:3 on landscape. The idea is to make the image small, no to take the entire screen estate.
