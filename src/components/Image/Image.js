@@ -5,14 +5,17 @@ import { makeStyles } from "@material-ui/styles";
 import * as yup from "yup";
 import isValid from "is-valid-path";
 
+import AspectRatioBox, {
+  AspectRatioBoxPropTypes,
+  AspectRatioBoxDefaultProps
+} from "../AspectRatioBox";
+
 /**
  * Defines the prop types
  *
  * @see https://schema.org/image for naming props
  */
 const propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
   /**
    * The URL of the image
    * - Use when the image is served from an URL
@@ -25,25 +28,31 @@ const propTypes = {
    * - Either `url` or `path` has to be set
    */
   path: PropTypes.string,
+  /**
+   * The image title
+   */
   caption: PropTypes.string,
   /**
-   * The image's aspect ratio
-   * - formula: height / width
-   * @see https://css-tricks.com/aspect-ratio-boxes/#the-math-of-any-possible-aspect-ratio
+   * The image dimensions
    */
-  aspectRatio: PropTypes.number
+  width: PropTypes.number,
+  height: PropTypes.number,
+  /**
+   * The image's aspect ratio
+   */
+  ...AspectRatioBoxPropTypes
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  width: null,
-  height: null,
   url: null,
   path: null,
   caption: null,
-  aspectRatio: null
+  width: null,
+  height: null,
+  ...AspectRatioBoxDefaultProps
 };
 
 /**
@@ -57,35 +66,6 @@ const schema = yup.object().shape({
  * Styles the component
  */
 const useStyles = makeStyles(theme => ({
-  container: props => ({
-    /**
-     * The aspect ratio box tends to grow as wide as possible (the screen width, or parent container's width)
-     * This resizes the box to fit it's image size
-     */
-    width: `${props.width}px`,
-    height: `${props.height}px`,
-    backgroundColor: "red"
-  }),
-
-  /**
-   * Aspect ratio boxes
-   * @see https://css-tricks.com/aspect-ratio-boxes/
-   */
-  aspectRatioBox: props => ({
-    position: "relative",
-    height: 0,
-    overflow: "hidden",
-    paddingBottom: `calc(${props.derivedAspectRatio} * 100%)`
-  }),
-
-  aspectRatioBoxInside: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%"
-  },
-
   image: {
     /**
      * Do not overflow the parent container
@@ -116,40 +96,7 @@ const Image = props => {
     ...responsiveProps
   } = props;
 
-  /**
-   * Defines an explicit aspect ratio
-   *
-   * - We always need an aspect ratio container due to the layout shift introduced by `height: auto`
-   * - In other words specifying an aspect ratio is more important than specifying the image dimension
-   *
-   * - When the image dimension is not set we can still provide the `aspectRatio` prop to manage the layout shift
-   * - When the image dimension is set we can automatically calculate the aspect ratio
-   */
-  const derivedAspectRatio = aspectRatio
-    ? aspectRatio
-    : width && height
-    ? height / width
-    : null;
-
-  /**
-   * When the image dimension is set we can still override the calculated aspect ratio with a provided `aspectRatio` prop
-   *
-   * // NOTE: This can truncate the image sometimes. A deeper analysis is needed.
-   */
-  const derivedDimensions =
-    aspectRatio && width && height
-      ? { width: width / aspectRatio, height: height }
-      : { width: width, height: height };
-
-  /**
-   * Applies the styles based on the above calculations
-   */
-  const { container, aspectRatioBox, aspectRatioBoxInside, image } = useStyles({
-    ...derivedDimensions,
-    derivedAspectRatio: derivedAspectRatio
-  });
-
-  // NOTE: When there is no dimensions and aspect ratio set the layout will shift. We can come up with a responsive mechanism to calculate an aspect ratio based on screen size. For example on portrait screens a 16:9, or a 4:3 on landscape. The idea is to make the image small, no to take the entire screen estate.
+  const { image } = useStyles(props);
 
   /**
    * Checks the source of the image.
@@ -187,16 +134,18 @@ const Image = props => {
    * Wraps the image into an aspect ratio container
    */
   const imgWithAspectRatioContainer = (
-    <div className={clsx(container, "ImageContainer")}>
-      <div className={clsx(aspectRatioBox, "AspectRatioBox")}>
-        <div className={clsx(aspectRatioBoxInside, "AspectRatioBoxInside")}>
-          {img}
-        </div>
-      </div>
-    </div>
+    <AspectRatioBox {...props}>{img}</AspectRatioBox>
   );
 
-  return derivedAspectRatio ? imgWithAspectRatioContainer : img;
+  /**
+   * Checks if the aspect ratio is defined
+   */
+  const isAspectRatioDefined = aspectRatio || (width && height);
+
+  /**
+   * Returns either a simple image or one warpped into an aspect ratio box
+   */
+  return isAspectRatioDefined ? imgWithAspectRatioContainer : img;
 };
 
 Image.propTypes = propTypes;
