@@ -93,7 +93,7 @@ const Picture = props => {
           }
         }
       );
-    });
+    }, null);
 
   console.log("responsiveAspectRatios:", responsiveAspectRatios);
 
