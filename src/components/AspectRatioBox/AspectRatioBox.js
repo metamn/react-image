@@ -65,6 +65,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 /**
+ * Checks if the aspect ratio is defined
+ */
+const isAspectRatioDefined = props => {
+  const { aspectRatio, width, height } = props;
+  return aspectRatio || (width && height);
+};
+
+/**
  * Displays the component
  */
 const AspectRatioBox = props => {
@@ -117,5 +125,6 @@ AspectRatioBox.defaultProps = defaultProps;
 export default AspectRatioBox;
 export {
   propTypes as AspectRatioBoxPropTypes,
-  defaultProps as AspectRatioBoxDefaultProps
+  defaultProps as AspectRatioBoxDefaultProps,
+  isAspectRatioDefined
 };

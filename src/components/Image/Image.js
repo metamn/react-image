@@ -7,7 +7,8 @@ import isValid from "is-valid-path";
 
 import AspectRatioBox, {
   AspectRatioBoxPropTypes,
-  AspectRatioBoxDefaultProps
+  AspectRatioBoxDefaultProps,
+  isAspectRatioDefined
 } from "../AspectRatioBox";
 
 /**
@@ -138,14 +139,9 @@ const Image = props => {
   );
 
   /**
-   * Checks if the aspect ratio is defined
-   */
-  const isAspectRatioDefined = aspectRatio || (width && height);
-
-  /**
    * Returns either a simple image or one warpped into an aspect ratio box
    */
-  return isAspectRatioDefined ? imgWithAspectRatioContainer : img;
+  return isAspectRatioDefined(props) ? imgWithAspectRatioContainer : img;
 };
 
 Image.propTypes = propTypes;
