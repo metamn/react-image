@@ -13,15 +13,27 @@ import { makeStyles } from "@material-ui/styles";
  * Defines the prop types
  */
 const propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
   /**
-   * The image's aspect ratio
-   * - formula: height / width
+   * The aspect ratio
+   * - Formula: height / width
    * @see https://css-tricks.com/aspect-ratio-boxes/#the-math-of-any-possible-aspect-ratio
    */
   aspectRatio: PropTypes.number,
+  /**
+   * Box dimensions
+   * - The aspect ratio can be calculated with the height / width formula, in case it is not set
+   */
+  width: PropTypes.number,
+  height: PropTypes.number,
+  /**
+   * Responsive aspect ratios
+   * - The aspect ratio sometimes differs from breakpoint to breakpoint.
+   * - An example is the `<picture>` element with art-directed images
+   */
   responsiveAspectRatios: PropTypes.arrayOf(PropTypes.object),
+  /**
+   * The content of the aspect ratio box
+   */
   children: PropTypes.any
 };
 
@@ -96,10 +108,14 @@ const AspectRatioBox = props => {
     children
   } = props;
 
-  console.log(
-    "responsiveAspectRatios:",
-    JSON.stringify(...responsiveAspectRatios)
-  );
+  const responsiveAspectRatios2 = {
+    ["@media (min-width:600px)"]: {
+      paddingBottom: `calc(0.75 * 100%)`
+    },
+    ["@media (min-width:900px)"]: {
+      paddingBottom: `calc(0.56 * 100%)`
+    }
+  };
 
   /**
    * When both `aspectRatio`, `width` and `height` is set `width` has to be modified
@@ -117,7 +133,7 @@ const AspectRatioBox = props => {
   const { container, box, boxInside } = useStyles({
     ...derivedDimensions,
     derivedAspectRatio: deriveAspectRatio(props),
-    responsiveAspectRatios: JSON.stringify(...responsiveAspectRatios)
+    responsiveAspectRatios: responsiveAspectRatios
   });
 
   // NOTE: When there is no dimensions and aspect ratio set the layout will shift. We can come up with a responsive mechanism to calculate an aspect ratio based on screen size. For example on portrait screens a 16:9, or a 4:3 on landscape. The idea is to make the image small, no to take the entire screen estate.

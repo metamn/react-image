@@ -80,23 +80,22 @@ const Picture = props => {
    */
   const responsiveAspectRatios =
     sources &&
-    sources
-      .map(item => {
-        const { media } = item;
-        const derivedAspectRatio = deriveAspectRatio(item);
+    sources.reduce((acc, item) => {
+      const { media } = item;
+      const derivedAspectRatio = deriveAspectRatio(item);
 
-        return (
-          media &&
-          derivedAspectRatio && {
-            [`@media ${media}`]: {
-              paddingBottom: `calc(${derivedAspectRatio} * 100%)`
-            }
+      return (
+        media &&
+        derivedAspectRatio && {
+          ...acc,
+          [`@media ${media}`]: {
+            paddingBottom: `calc(${derivedAspectRatio} * 100%)`
           }
-        );
-      })
-      .filter(item => item !== undefined && item !== null);
+        }
+      );
+    });
 
-  console.log("responsiveAspectRatios[0]:", responsiveAspectRatios[0]);
+  console.log("responsiveAspectRatios:", responsiveAspectRatios);
 
   /**
    * Displays the picture
@@ -120,9 +119,7 @@ const Picture = props => {
   /**
    * Returns either a simple picture or one wrapped into an aspect ratio container
    */
-  return responsiveAspectRatios.length > 0
-    ? pictureWithAspectRatioContainer
-    : picture;
+  return responsiveAspectRatios ? pictureWithAspectRatioContainer : picture;
 };
 
 Picture.propTypes = propTypes;
