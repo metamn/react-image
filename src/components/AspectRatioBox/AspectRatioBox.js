@@ -83,8 +83,8 @@ const useStyles = makeStyles(theme => ({
  * Checks if the aspect ratio is defined
  */
 const isAspectRatioDefined = props => {
-  const { aspectRatio, width, height } = props;
-  return aspectRatio || (width && height);
+  const { aspectRatio, responsiveAspectRatios, width, height } = props;
+  return aspectRatio || responsiveAspectRatios || (width && height);
 };
 
 /**
@@ -130,9 +130,10 @@ const AspectRatioBox = props => {
   });
 
   /**
-   * Returns early on an empty children
+   * Returns early on incomplete props
    */
   if (!children) return null;
+  if (!isAspectRatioDefined(props)) return null;
 
   return (
     <div className={clsx(container, "AspectRatioContainer")} role="img">
