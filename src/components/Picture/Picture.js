@@ -1,3 +1,10 @@
+/**
+ * Displays a responsive image with art direction
+ * - Supports the `<source>` mechanism
+ * - For resolution switching (`<srcset>`, `<sizes>`) use <ResponsiveImage/>
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+ */
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -19,7 +26,7 @@ const propTypes = {
    */
   ...ImagePropTypes,
   /**
-   * The art-directed images
+   * The art-directed image props
    */
   sources: PropTypes.arrayOf(
     PropTypes.shape({
@@ -36,7 +43,11 @@ const propTypes = {
        */
       ...AspectRatioBoxPropTypes
     })
-  )
+  ),
+  /**
+   * Additional styling for the Aspect Ratio Box
+   */
+  aspectRatioBox: PropTypes.shape(AspectRatioBoxPropTypes)
 };
 
 /**
@@ -44,7 +55,8 @@ const propTypes = {
  */
 const defaultProps = {
   ...ImageDefaultProps,
-  sources: null
+  sources: null,
+  aspectRatioBox: null
 };
 
 /**
@@ -53,13 +65,14 @@ const defaultProps = {
 const Picture = props => {
   /**
    * Perpares safe props for `<Image />`
-   * - When an image is responsive setting the `width`, `height` on `src` makes no sense
-   * - Also `sources` should be removed
+   * - When an image is art-directed setting the `width`, `height` on `src` makes no sense. On different viewports different dimenions will apply.
+   * - Also `sources`, `aspectRatioBox` etc should be removed
    */
-  const { width, height, sources, ...safeProps } = props;
+  const { width, height, sources, aspectRatioBox, ...safeProps } = props;
 
   /**
-   * Creates `<source>` entries
+   * Creates `<source>` entries.
+   * - Tranforms the `sourceList` array into a series of `<source>` props
    */
   const sourceList =
     sources &&
@@ -77,6 +90,10 @@ const Picture = props => {
 
   /**
    * Collects responsive aspect ratios for every `<source>`
+   * - On different viewports differently sized images are displayed (aka art direction)
+   * - Each image will be (preferably) displayed with the help of a custom aspect ratio box
+   * - An aspect ratio box sets the aspect ration with the padding-bottom hack
+   * - Here we create all padding-bottom hacks for all viewports and image sizes
    */
   const responsiveAspectRatios =
     sources &&
@@ -99,7 +116,7 @@ const Picture = props => {
    * Displays the picture
    */
   const picture = (
-    <picture className={clsx("ResponsiveImage")}>
+    <picture className={clsx("Picture")}>
       {sourceList}
       <Image {...safeProps} />
     </picture>
@@ -109,7 +126,10 @@ const Picture = props => {
    * Wraps the picture inside a responsive aspect ratio container
    */
   const pictureWithAspectRatioContainer = (
-    <AspectRatioBox responsiveAspectRatios={responsiveAspectRatios}>
+    <AspectRatioBox
+      {...aspectRatioBox}
+      responsiveAspectRatios={responsiveAspectRatios}
+    >
       {picture}
     </AspectRatioBox>
   );

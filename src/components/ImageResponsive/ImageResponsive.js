@@ -1,3 +1,11 @@
+/**
+ * Displays a responsive image
+ * - Supports the resolution switching mechanism with `srcset` and `sizes`
+ * - For art direction the `<Picture/>` component should be used
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -34,18 +42,11 @@ const defaultProps = {
 /**
  * Displays the component
  *
- * - A responsive image is an `<Image />` with `srcSet` and `sizes` set
- * - If `aspectRatio` set the layout won't flick on any viewport
- * - If on different viewports different aspect ratios are needed then the `<Picture />` element should be used
+ * - This is a lighweight component.
+ * - A responsive image is nothing more than an `<Image />` with `srcSet` and `sizes` set
  */
 const ImageResponsive = props => {
-  /**
-   * Perpares safe props for `<Image />`
-   * - When an image is responsive setting the `width`, `height` on `src` makes no sense
-   */
-  const { width, height, ...safeProps } = props;
-
-  return <Image className={clsx("ResponsiveImage")} {...safeProps} />;
+  return <Image className={clsx("ResponsiveImage")} {...props} />;
 };
 
 ImageResponsive.propTypes = propTypes;

@@ -10,7 +10,7 @@ export default {
 
 export const Default = () => <Picture />;
 
-export const DemoWithPlaceholders = () => (
+export const AspectRatioSet = () => (
   <Picture
     sources={[
       {
@@ -39,10 +39,11 @@ export const DemoWithPlaceholders = () => (
       }
     ]}
     url="http://metamn.io/beat/assets/images/bohen-landscape_laptop.png"
+    aspectRatioBox={{ boxStyle: { backgroundColor: "red" } }}
   />
 );
 
-export const DifferentImagesOnPortraitAndLandscape = () => (
+export const AspectRatioNotSet = () => (
   <Picture
     sources={[
       {
@@ -67,5 +68,6 @@ export const DifferentImagesOnPortraitAndLandscape = () => (
       }
     ]}
     url="http://metamn.io/beat/assets/images/bohen-landscape_laptop.png"
+    aspectRatioBox={{ boxStyle: { backgroundColor: "red" } }}
   />
 );

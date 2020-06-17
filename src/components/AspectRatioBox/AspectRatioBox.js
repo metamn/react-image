@@ -2,7 +2,6 @@
  * Creates a fixed aspect ratio box / container via the padding-bottom hack
  *
  * @see https://css-tricks.com/aspect-ratio-boxes/
- * @see https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/
  */
 import React from "react";
 import PropTypes from "prop-types";

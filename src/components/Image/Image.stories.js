@@ -84,6 +84,7 @@ export const AspectRatioOverwritesWidthAndHeight = () => {
       width="150"
       height="150"
       aspectRatio={9 / 16}
+      boxStyle={{ backgroundColor: "red" }}
     />
   );
 };
@@ -98,6 +99,7 @@ export const AspectRatioOverwritesWidthAndHeight2 = () => {
       caption="Image caption"
       width="150"
       aspectRatio={9 / 16}
+      boxStyle={{ backgroundColor: "red" }}
     />
   );
 };
@@ -109,6 +111,7 @@ export const AspectRatioOverwritesWidthAndHeight3 = () => {
       caption="Image caption"
       width="150"
       aspectRatio={4 / 3}
+      boxStyle={{ backgroundColor: "red" }}
     />
   );
 };

@@ -1,3 +1,10 @@
+/**
+ * Displays an image
+ * - Usually inside an aspect ratio container to avoid page flicks
+ *
+ * @see https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
