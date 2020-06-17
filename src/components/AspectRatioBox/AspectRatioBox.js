@@ -141,6 +141,12 @@ const AspectRatioBox = props => {
   } = props;
 
   /**
+   * Returns early on incomplete props
+   */
+  if (!children) return null;
+  if (!isAspectRatioDefined(props)) return null;
+
+  /**
    * When both `aspectRatio`, `width` and `height` is set `width` and/or `height` has to be modified to fit the box
    *
    * // NOTE: This can truncate the box content sometimes. A deeper analysis is needed.
@@ -167,12 +173,6 @@ const AspectRatioBox = props => {
    * Loads the children style
    */
   const { childrenStyled } = childrenStyles(props);
-
-  /**
-   * Returns early on incomplete props
-   */
-  if (!children) return null;
-  if (!isAspectRatioDefined(props)) return null;
 
   return (
     <div className={clsx(container, "AspectRatioContainer")} role="img">
