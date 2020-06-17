@@ -39,14 +39,14 @@ const propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   /**
+   * The style of the box
+   * - For example a background color can be set to act like a placeholder. A colored box is displayed while the content is loaded.
+   */
+  boxStyle: PropTypes.object,
+  /**
    * The content of the aspect ratio box
    */
   children: PropTypes.any,
-  /**
-   * The background color of the box
-   * - When set it acts like a placeholder. A colored box is displayed while the content is loaded.
-   */
-  backgroundColor: PropTypes.string,
   /**
    * Styles for the children
    * - The children can be centered to the container
@@ -63,8 +63,8 @@ const defaultProps = {
   responsiveAspectRatios: null,
   width: null,
   height: null,
+  boxStyle: null,
   children: null,
-  backgroundColor: null,
   childrenStyle: null
 };
 
@@ -96,7 +96,7 @@ const containerStyles = makeStyles(theme => ({
   container: props => ({
     width: `${props.width}px`,
     height: `${props.height}px`,
-    backgroundColor: props.backgroundColor
+    ...props.boxStyle
   })
 }));
 

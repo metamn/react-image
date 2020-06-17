@@ -5,12 +5,11 @@ import AspectRatioBox, {
   calculateAspectRatio
 } from "./AspectRatioBox";
 
-it("exports a `calculateAspectRatio` function", () => {
-  const result = calculateAspectRatio({});
-});
-
-it("exports an `isAspectRatioDefined` function", () => {
-  const result = isAspectRatioDefined({});
+it("renders the component when `children` and aspect artio is set", () => {
+  const { queryByRole } = render(
+    <AspectRatioBox children="children" aspectRatio={9 / 16} />
+  );
+  expect(queryByRole("img")).toBeInTheDocument();
 });
 
 it("renders nothing when the the aspect ratio cannot be set", () => {
@@ -21,4 +20,12 @@ it("renders nothing when the the aspect ratio cannot be set", () => {
 it("renders nothing when the `children` prop is missing", () => {
   const { queryByRole } = render(<AspectRatioBox />);
   expect(queryByRole("img")).toBeNull();
+});
+
+it("exports a `calculateAspectRatio` function", () => {
+  const result = calculateAspectRatio({});
+});
+
+it("exports an `isAspectRatioDefined` function", () => {
+  const result = isAspectRatioDefined({});
 });

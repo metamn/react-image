@@ -20,7 +20,7 @@ export const WithBackgroundColor = () => (
   <AspectRatioBox
     children="Children"
     aspectRatio={9 / 16}
-    backgroundColor="red"
+    boxStyle={{ backgroundColor: "red" }}
   />
 );
 
@@ -28,7 +28,7 @@ export const WithWidth = () => (
   <AspectRatioBox
     children="Children"
     aspectRatio={9 / 16}
-    backgroundColor="red"
+    boxStyle={{ backgroundColor: "red" }}
     width={300}
   />
 );
@@ -37,7 +37,7 @@ export const WithChildrenStyled = () => (
   <AspectRatioBox
     children="Children"
     aspectRatio={9 / 16}
-    backgroundColor="red"
+    boxStyle={{ backgroundColor: "red" }}
     width={300}
     childrenStyle={{
       display: "flex",

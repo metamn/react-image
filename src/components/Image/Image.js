@@ -95,6 +95,8 @@ const Image = props => {
     height,
     aspectRatio,
     responsiveAspectRatios,
+    boxStyle,
+    childrenStyle,
     ...responsiveProps
   } = props;
 
