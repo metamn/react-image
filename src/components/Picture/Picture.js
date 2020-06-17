@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Image, { ImagePropTypes, ImageDefaultProps } from "../Image";
 import AspectRatioBox, {
   AspectRatioBoxPropTypes,
-  deriveAspectRatio
+  calculateAspectRatio
 } from "../AspectRatioBox";
 
 /**
@@ -82,7 +82,7 @@ const Picture = props => {
     sources &&
     sources.reduce((acc, item) => {
       const { media } = item;
-      const derivedAspectRatio = deriveAspectRatio(item);
+      const derivedAspectRatio = calculateAspectRatio(item);
 
       return (
         media &&
@@ -94,8 +94,6 @@ const Picture = props => {
         }
       );
     }, null);
-
-  console.log("responsiveAspectRatios:", responsiveAspectRatios);
 
   /**
    * Displays the picture

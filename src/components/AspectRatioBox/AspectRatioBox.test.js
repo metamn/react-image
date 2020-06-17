@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import AspectRatioBox from "./AspectRatioBox";
 
-it("has a AspectRatioBox component", () => {
-  const { getByText } = render(<AspectRatioBox />);
-  expect(getByText("AspectRatioBox")).toBeInTheDocument();
+it("renders nothing when the `children` prop is missing", () => {
+  const { queryByRole } = render(<AspectRatioBox />);
+  expect(queryByRole("img")).toBeNull();
 });

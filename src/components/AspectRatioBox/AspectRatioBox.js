@@ -20,17 +20,17 @@ const propTypes = {
    */
   aspectRatio: PropTypes.number,
   /**
-   * Box dimensions
-   * - The aspect ratio can be calculated with the height / width formula, in case it is not set
-   */
-  width: PropTypes.number,
-  height: PropTypes.number,
-  /**
    * Responsive aspect ratios
    * - The aspect ratio sometimes differs from breakpoint to breakpoint.
    * - An example is the `<picture>` element with art-directed images
    */
   responsiveAspectRatios: PropTypes.arrayOf(PropTypes.object),
+  /**
+   * Box dimensions
+   * - The aspect ratio can be calculated with the height / width formula, in case it is not set
+   */
+  width: PropTypes.number,
+  height: PropTypes.number,
   /**
    * The content of the aspect ratio box
    */
@@ -41,10 +41,10 @@ const propTypes = {
  * Defines the default props
  */
 const defaultProps = {
-  width: null,
-  height: null,
   aspectRatio: null,
   responsiveAspectRatios: null,
+  width: null,
+  height: null,
   children: null
 };
 
@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   container: props => ({
     /**
      * The aspect ratio box tends to grow as wide as possible (the screen width, or parent container's width)
-     * This resizes the box to fit it's image size
+     * This resizes the box to fit it's children size
      */
     width: `${props.width}px`,
     height: `${props.height}px`,
@@ -88,37 +88,30 @@ const isAspectRatioDefined = props => {
 };
 
 /**
- * Defines an explicit aspect ratio
- * - When `aspectRatio` is missing it is calculated from `width` and `height`
+ * Calculates the aspect ratio
+ * - When `aspectRatio` is missing it can be calculated from `width` and `height`
  */
-const deriveAspectRatio = props => {
+const calculateAspectRatio = props => {
   const { aspectRatio, width, height } = props;
   return aspectRatio ? aspectRatio : width && height ? height / width : null;
 };
 
 /**
  * Displays the component
+ *
+ * // NOTE: When there is no dimensions and aspect ratio set the layout will shift. We can come up with a responsive mechanism to calculate an aspect ratio based on screen size. For example on portrait screens a 16:9, or a 4:3 on landscape. The idea is to make the image small, no to take the entire screen estate.
  */
 const AspectRatioBox = props => {
   const {
-    width,
-    height,
     aspectRatio,
     responsiveAspectRatios,
+    width,
+    height,
     children
   } = props;
 
-  const responsiveAspectRatios2 = {
-    ["@media (min-width:600px)"]: {
-      paddingBottom: `calc(0.75 * 100%)`
-    },
-    ["@media (min-width:900px)"]: {
-      paddingBottom: `calc(0.56 * 100%)`
-    }
-  };
-
   /**
-   * When both `aspectRatio`, `width` and `height` is set `width` has to be modified
+   * When both `aspectRatio`, `width` and `height` is set `width` and/or `height` has to be modified to fit the box
    *
    * // NOTE: This can truncate the box content sometimes. A deeper analysis is needed.
    */
@@ -128,18 +121,21 @@ const AspectRatioBox = props => {
       : { width: width, height: height };
 
   /**
-   * Applies the styles based on the above calculations
+   * Creates the styles based on the above calculations
    */
   const { container, box, boxInside } = useStyles({
     ...derivedDimensions,
-    derivedAspectRatio: deriveAspectRatio(props),
+    derivedAspectRatio: calculateAspectRatio(props),
     responsiveAspectRatios: responsiveAspectRatios
   });
 
-  // NOTE: When there is no dimensions and aspect ratio set the layout will shift. We can come up with a responsive mechanism to calculate an aspect ratio based on screen size. For example on portrait screens a 16:9, or a 4:3 on landscape. The idea is to make the image small, no to take the entire screen estate.
+  /**
+   * Returns early on an empty children
+   */
+  if (!children) return null;
 
   return (
-    <div className={clsx(container, "AspectRatioContainer")}>
+    <div className={clsx(container, "AspectRatioContainer")} role="img">
       <div className={clsx(box, "AspectRatioBox")}>
         <div className={clsx(boxInside, "AspectRatioBoxInside")}>
           {children}
@@ -157,5 +153,5 @@ export {
   propTypes as AspectRatioBoxPropTypes,
   defaultProps as AspectRatioBoxDefaultProps,
   isAspectRatioDefined,
-  deriveAspectRatio
+  calculateAspectRatio
 };
