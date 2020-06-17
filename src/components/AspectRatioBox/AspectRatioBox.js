@@ -23,18 +23,30 @@ const propTypes = {
    * Responsive aspect ratios
    * - The aspect ratio sometimes differs from breakpoint to breakpoint.
    * - An example is the `<picture>` element with art-directed images
+   * - A responsive aspect ratio looks like:
+   * ```
+   [`@media (min-width: 600px)`]: {
+	 	paddingBottom: 52.6%
+   	}
+   ```
    */
   responsiveAspectRatios: PropTypes.arrayOf(PropTypes.object),
   /**
    * Box dimensions
-   * - The aspect ratio can be calculated with the height / width formula, in case it is not set
+   * - The aspect ratio can be calculated with the height / width formula, in case it is not set explicitely with `aspectRatio`
+   * - The aspect ratio box tends to grow as wide as possible (the screen width, or parent container's width. When box dimenions are set the box will fit it's children size.
    */
   width: PropTypes.number,
   height: PropTypes.number,
   /**
    * The content of the aspect ratio box
    */
-  children: PropTypes.any
+  children: PropTypes.any,
+  /**
+   * The background color of the box
+   * - When set it acts like a placeholder. A colored box is displayed while the content is loaded.
+   */
+  backgroundColor: PropTypes.string
 };
 
 /**
@@ -45,23 +57,14 @@ const defaultProps = {
   responsiveAspectRatios: null,
   width: null,
   height: null,
-  children: null
+  children: null,
+  backgroundColor: null
 };
 
 /**
  * Styles the component
  */
-const useStyles = makeStyles(theme => ({
-  container: props => ({
-    /**
-     * The aspect ratio box tends to grow as wide as possible (the screen width, or parent container's width)
-     * This resizes the box to fit it's children size
-     */
-    width: `${props.width}px`,
-    height: `${props.height}px`,
-    backgroundColor: "red"
-  }),
-
+const defaultStyles = makeStyles(theme => ({
   box: props => ({
     position: "relative",
     height: 0,
@@ -77,6 +80,17 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%"
   }
+}));
+
+/**
+ * Styles the container
+ */
+const containerStyles = makeStyles(theme => ({
+  container: props => ({
+    width: `${props.width}px`,
+    height: `${props.height}px`,
+    backgroundColor: props.backgroundColor
+  })
 }));
 
 /**
@@ -121,13 +135,17 @@ const AspectRatioBox = props => {
       : { width: width, height: height };
 
   /**
-   * Creates the styles based on the above calculations
+   * Loads the default styles
    */
-  const { container, box, boxInside } = useStyles({
-    ...derivedDimensions,
+  const { box, boxInside } = defaultStyles({
     derivedAspectRatio: calculateAspectRatio(props),
     responsiveAspectRatios: responsiveAspectRatios
   });
+
+  /**
+   * Loads the container style
+   */
+  const { container } = containerStyles(props);
 
   /**
    * Returns early on incomplete props
