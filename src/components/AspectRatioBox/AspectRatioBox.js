@@ -46,7 +46,13 @@ const propTypes = {
    * The background color of the box
    * - When set it acts like a placeholder. A colored box is displayed while the content is loaded.
    */
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+  /**
+   * Styles for the children
+   * - The children can be centered to the container
+   * - Or can be styled as necessary
+   */
+  childrenStyle: PropTypes.object
 };
 
 /**
@@ -58,7 +64,8 @@ const defaultProps = {
   width: null,
   height: null,
   children: null,
-  backgroundColor: null
+  backgroundColor: null,
+  childrenStyle: null
 };
 
 /**
@@ -90,6 +97,15 @@ const containerStyles = makeStyles(theme => ({
     width: `${props.width}px`,
     height: `${props.height}px`,
     backgroundColor: props.backgroundColor
+  })
+}));
+
+/**
+ * Styles the children
+ */
+const childrenStyles = makeStyles(theme => ({
+  childrenStyled: props => ({
+    ...props.childrenStyle
   })
 }));
 
@@ -148,6 +164,11 @@ const AspectRatioBox = props => {
   const { container } = containerStyles(props);
 
   /**
+   * Loads the children style
+   */
+  const { childrenStyled } = childrenStyles(props);
+
+  /**
    * Returns early on incomplete props
    */
   if (!children) return null;
@@ -156,7 +177,9 @@ const AspectRatioBox = props => {
   return (
     <div className={clsx(container, "AspectRatioContainer")} role="img">
       <div className={clsx(box, "AspectRatioBox")}>
-        <div className={clsx(boxInside, "AspectRatioBoxInside")}>
+        <div
+          className={clsx(boxInside, childrenStyled, "AspectRatioBoxInside")}
+        >
           {children}
         </div>
       </div>
