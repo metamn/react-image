@@ -94,6 +94,8 @@ const Picture = props => {
    * - Each image will be (preferably) displayed with the help of a custom aspect ratio box
    * - An aspect ratio box sets the aspect ration with the padding-bottom hack
    * - Here we create all padding-bottom hacks for all viewports and image sizes
+   *
+   * // NOTE: Do we need responsive widths and heights?
    */
   const responsiveAspectRatios =
     sources &&
